@@ -50,11 +50,24 @@ const Maker = ({ authService }) => {
       }
     });
   });
+
+  const addCard = (card) => {
+    const updated = [...cards, card];
+    setCards(updated);
+  };
+
+  const updateCard = (card) => {
+    console.log('updateCard', card);
+  };
+
+  const deleteCard = (card) => {
+    console.log('deleteCard', card);
+  };
   return (
     <section className={styles.maker}>
       <Header onLogout={onLogout} />
       <div className={styles.container}>
-        <Editor cards={cards} />
+        <Editor cards={cards} addCard={addCard} updateCard={updateCard} deleteCard={deleteCard} />
         <Preview cards={cards} />
       </div>
       <Footer />
