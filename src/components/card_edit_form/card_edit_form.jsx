@@ -17,7 +17,7 @@ const CardEditForm = ({ card, updateCard, deleteCard }) => {
     });
   };
   const onSubmit = () => {
-    console.log('submit');
+    deleteCard(card);
   };
   return (
     <form className={styles.form}>
@@ -29,7 +29,7 @@ const CardEditForm = ({ card, updateCard, deleteCard }) => {
         value={company}
         onChange={onChange}
       />
-      <select className={styles.select} name="theme" value={theme}>
+      <select className={styles.select} name="theme" value={theme} onChange={onChange}>
         <option value="light">light</option>
         <option value="dark">dark</option>
         <option value="colorful">colorful</option>
