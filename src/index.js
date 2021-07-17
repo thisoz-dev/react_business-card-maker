@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import ReactDOM from 'react-dom';
 import './index.module.css';
 import App from './app';
@@ -17,7 +17,9 @@ const imageUploader = new ImageUploader();
 때문에 한단계 감싸는 컴포넌트로 사용자가 원하는 prop을 전달해 확장 가능한 컴포넌트로 사용할 수 있도록 작성하는 것이다.*/
 /* 부모를 통해서 계속해서 전달, 전달, 전달... 하는 과정이 필요할 때 아래와 같이 작성해서 
 여러 컴포넌트에서 수정하지 않고 한번만 변경해주면 모든 컴포넌트에서 반영되기 때문에 좀 더 간편하게 사용 가능하다.*/
-const FileInput = (props) => <ImageFileInput {...props} imageUploader={imageUploader} />;
+const FileInput = memo((props) => (
+  <ImageFileInput {...props} imageUploader={imageUploader} />
+));
 
 ReactDOM.render(
   <React.StrictMode>
