@@ -1,19 +1,31 @@
-import firebase from 'firebase';
-import firebaseApp from './firebase';
+import { firebaseAuth, googleProvider, githubProvider } from './firebase';
 
 class AuthService {
   login(providerName) {
-    // provicerName 구글, 페이스북, 트위터
-    const authProvider = new firebase.auth[`${providerName}AuthProvider`]();
-    return firebaseApp.auth().signInWithPopup(authProvider);
+    // providerName 구글, 페이스북, 트위터
+    const authProvider = this.getProvider(providerName);
+    return firebaseAuth.signInWithPopup(authProvider);
   }
+
   logout() {
-    firebase.auth().signOut();
+    firebaseAuth.signOut();
   }
+
   onAuthChange(onUserChanged) {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebaseAuth.onAuthStateChanged((user) => {
       onUserChanged(user);
     });
+  }
+
+  getProvider(providerName) {
+    switch (providerName) {
+      case 'Google':
+        return googleProvider;
+      case 'Github':
+        return githubProvider;
+      default:
+        throw new Error(`not supported provider: ${providerName}`);
+    }
   }
 }
 

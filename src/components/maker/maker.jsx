@@ -31,7 +31,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
     컴포넌트가 언마운트 되었을 때 리턴한 함수를 호출해준다. 때문에 언마운트가 되면
     리소스, 메모리들을 정리하는 일들을 할 수있음 */
     return () => stopSync();
-  }, [userId]);
+  }, [userId, cardRepository]);
 
   /* login 관련 useEffect */
   useEffect(() => {
@@ -42,7 +42,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
         history.push('/');
       }
     });
-  });
+  }, [authService, userId, history]);
 
   const createOrUpdateCard = (card) => {
     setCards((cards) => {
